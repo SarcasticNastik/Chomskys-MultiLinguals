@@ -6,6 +6,36 @@ from torch.autograd import Variable
 from mst import mst_one_out_root
 from collections import defaultdict
 
+"""
+Input -> Sentence
+Output -> UPOS, XPOS, UAS, LAS, CLAS (average)
+
+UPOS := Universal POS
+XPOS := Language-specific POS
+UAS := unlabelled attachment score
+> UAS = % of words that get the correct head
+LAS := labelled attachment score
+> LAS = % of words that get the correct head and label
+CLAS := content-labelled attachment 
+> CLAS = Labelled F1 score over all the relations except relations in 
+         fun and punc (MAA CHUDAE)
+"""
+
+
+"""
+Sentence structure
+
+sentence[k]: [Array of values containing word, XPOS, UPOS]
+"""
+
+def uas():
+    pass
+
+
+def las():
+    pass
+
+
 if __name__ == "__main__":
     (w2i, i2w, t2i, i2t, l2i, i2l, sentences,
      index_sentences, golden_labels) = read_conllu_file(sys.argv[1])
@@ -34,7 +64,7 @@ if __name__ == "__main__":
         for i in range(M.size(1)):
             sg = {}
             for k in range(M.size(0)):
-                sg[k] = predicted_M[i, k].data[0]
+                sg[k] = predicted_M[i, k].item()
                 if i == 0:
                     sg[k] = 0
             graph[i] = sg
@@ -65,7 +95,7 @@ if __name__ == "__main__":
                                        sentence[i][4],
                                        sentence[i][1],
                                        f,
-                                       model.i2l[indices[j].data[0]]]
+                                       model.i2l[indices[j].item()]]
 
         for i in new_sentence:
             string = '{}\t{}\t_\t_\t{}\t_\t{}\t{}\t_\t'.format(*new_sentence[i])
