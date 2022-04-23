@@ -5,7 +5,10 @@ import numpy as np
 
 def read_voc_pos_tags_from_conllu_file(filename):
     file = open(filename, 'r', encoding="utf8")
-    pos_tags = []
+    upos_tags = []
+    xpos_tags = []
+    heads = []
+    deprels = []
     vocabulary = []
     sentences = []
 
@@ -34,13 +37,16 @@ def read_voc_pos_tags_from_conllu_file(filename):
                           line_split[1],
                           line_split[0]])
 
-                pos_tags.append(line_split[4])
+                upos_tags.append(line_split[3])
+                xpos_tags.append(line_split[4])
+                heads.append(line_split[6])
+                deprels.append(line_split[7])
                 vocabulary.append(line_split[1].lower())
 
         
         # print(f"=====S====\n{s}\n====pos_tags====\n{pos_tags}\n====vocab====\n{vocabulary}")
         # exit()
-        
+
         # golden_labels = []
         # M = np.zeros((len(s) + 1, len(s) + 1))
         # for i, w in enumerate(s.keys()):
@@ -54,7 +60,7 @@ def read_voc_pos_tags_from_conllu_file(filename):
     
     # print(vocabulary, pos_tags, sentences)
     # exit()
-    return vocabulary, pos_tags, sentences
+    return vocabulary, upos_tags, xpos_tags, heads, deprels, sentences
 
 def read_conllu_file(filename):
 
