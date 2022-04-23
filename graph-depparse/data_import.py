@@ -47,16 +47,16 @@ def read_voc_pos_tags_from_conllu_file(filename):
         # print(f"=====S====\n{s}\n====pos_tags====\n{pos_tags}\n====vocab====\n{vocabulary}")
         # exit()
 
-        # golden_labels = []
-        # M = np.zeros((len(s) + 1, len(s) + 1))
-        # for i, w in enumerate(s.keys()):
-        #     if s[w][2] == '_':
-        #         continue
-        #     M[w2i[s[w][2]]][i+1] = 1
-        #     golden_labels.append([w2i[s[w][2]], i+1, s[w][3]])
-        # M[0, 0] = 1
-        # if s:
-        #     sentences.append([s, M, golden_labels])
+        golden_labels = []
+        M = np.zeros((len(s) + 1, len(s) + 1))
+        for i, w in enumerate(s.keys()):
+            if s[w][2] == '_':
+                continue
+            M[w2i[s[w][2]]][i+1] = 1
+            golden_labels.append([w2i[s[w][2]], i+1, s[w][3]])
+        M[0, 0] = 1
+        if s:
+            sentences.append([s, M, golden_labels])
     
     # print(vocabulary, pos_tags, sentences)
     # exit()

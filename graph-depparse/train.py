@@ -29,10 +29,8 @@ if __name__ == "__main__":
 
     # 3 epochs and batch size is 1.
     print(len(sentences))
-    # exit()
+
     for i in range(len(sentences) * 3):
-        # if i % 12 != 0:
-        #     continue
         s, M, _ = sentences[i % len(sentences)]
         sentence = index_sentences[i % len(sentences)]
 
@@ -101,5 +99,5 @@ if __name__ == "__main__":
 
         loss.backward()
         optimizer.step()
-        
+
     torch.save(model, 'model_{}_{}'.format(dt, sys.argv[1]))
