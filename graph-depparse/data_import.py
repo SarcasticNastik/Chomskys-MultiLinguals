@@ -60,7 +60,8 @@ def read_voc_pos_tags_from_conllu_file(filename):
     
     # print(vocabulary, pos_tags, sentences)
     # exit()
-    return vocabulary, upos_tags, xpos_tags, heads, deprels, sentences
+    # return vocabulary, upos_tags, xpos_tags, heads, deprels, sentences
+    return vocabulary, xpos_tags, sentences
 
 def read_conllu_file(filename):
 
